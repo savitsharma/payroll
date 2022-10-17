@@ -1,0 +1,53 @@
+package com.example.demo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
+import com.example.demo.dto.Payroll_Itemdto;
+
+import com.example.demo.services.Payroll_itemServices;
+
+public class Payroll_itemController {
+	
+	@Autowired
+	Payroll_itemServices payroll_itemServices;
+	
+	
+	@PostMapping("/payroll_itemService")
+	public ResponseEntity<Payroll_Itemdto> savepayrollitem(@RequestBody Payroll_Itemdto payroll_Itemdto){
+		payroll_itemServices.savePayrollitem(payroll_Itemdto);
+		
+		
+		return new ResponseEntity<>(payroll_Itemdto,HttpStatus.CREATED);
+		
+	}
+
+	    @DeleteMapping("/payrollitem/{payrollitemId}")
+	    public void deleteAllo(@PathVariable("payrollitemId") int id){
+	      
+	    	
+	    	payroll_itemServices.deletePayrollitem(id);
+	    }
+	  
+	  
+
+
+	    @PutMapping("/payrollitem")
+	    public ResponseEntity<Payroll_Itemdto> updatepayrollitem(@RequestBody Payroll_Itemdto payroll_Itemdto)
+	    {
+	       payroll_itemServices.updatePayrollitem(payroll_Itemdto);
+	        return new ResponseEntity<>(payroll_Itemdto, HttpStatus.ACCEPTED);
+	    }
+
+		
+	
+	
+
+}
