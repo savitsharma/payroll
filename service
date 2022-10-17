@@ -1,0 +1,94 @@
+package com.example.demo.services;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+
+import com.example.demo.Repository.PayrollItemRepository;
+import com.example.demo.dto.Payroll_Itemdto;
+import com.example.demo.entities.Payroll_Item;
+
+public class Payroll_itemServices {
+	
+	@Autowired
+	PayrollItemRepository payrollItemRepository;
+	
+	public void savePayrollitem(Payroll_Itemdto payroll_Itemdto)
+	{
+		payrollItemRepository.save(payroll_Itemdtotopayroll_Item(payroll_Itemdto));
+	}
+	
+	 public List<Payroll_Itemdto> getAllpayrollitem(){
+
+	        List<Payroll_Item> listpayrollitem= this.payrollItemRepository.findAll();
+
+	
+
+    List<Payroll_Itemdto> payrollitemdtoList = listpayrollitem.stream().map(emp -> this.payroll_Itemtopayroll_Itemdto(emp)).collect(Collectors.toList());
+	return payrollitemdtoList;
+
+	 }	
+	
+	
+	
+	 public void deletePayrollitem(int empId){
+
+	     payrollItemRepository.deleteById(empId);
+
+	    }
+	    public Payroll_Itemdto updatePayrollitem(Payroll_Itemdto payroll_Itemdto)
+	    {
+	    payrollItemRepository.save(payroll_Itemdtotopayroll_Item(payroll_Itemdto));
+	    return payroll_Itemdto;
+
+	    }
+
+
+	 public Payroll_Item payroll_Itemdtotopayroll_Item(Payroll_Itemdto payroll_Itemdto)
+	    {
+	          Payroll_Item payrollItem =new Payroll_Item();
+	          
+	          payrollItem.setId(payrollItem.getId());;
+		      payrollItem.setPayrollid(payrollItem.getPayrollid());
+		      payrollItem.setEmployeeid(payrollItem.getEmployeeid());
+		      payrollItem.setPresent(payrollItem.getPresent());
+		      payrollItem.setAbsent(payrollItem.getAbsent());
+		      payrollItem.setLate(payrollItem.getLate());
+		      payrollItem.setSalary(payrollItem.getSalary());
+		      payrollItem.setAllowance_amount(payrollItem.getAllowance_amount());
+		      payrollItem.setAllownces_type(payrollItem.getAllownces_type());
+		      payrollItem.setDeduction_amouont(payrollItem.getDeduction_amouont());
+		      payrollItem.setDeductions(payrollItem.getDeductions());
+		      payrollItem.setGross_net(payrollItem.getGross_net());
+		      payrollItem.setDate_created(payrollItem.getDate_created());
+
+	       
+	        return payrollItem;
+	    }
+
+	    public Payroll_Itemdto payroll_Itemtopayroll_Itemdto(Payroll_Item payroll_Item)
+	    {
+	        Payroll_Itemdto payrollItem= new Payroll_Itemdto();
+
+	      payrollItem.setId(payrollItem.getId());;
+	      payrollItem.setPayrollid(payrollItem.getPayrollid());
+	      payrollItem.setEmployeeid(payrollItem.getEmployeeid());
+	      payrollItem.setPresent(payrollItem.getPresent());
+	      payrollItem.setAbsent(payrollItem.getAbsent());
+	      payrollItem.setLate(payrollItem.getLate());
+	      payrollItem.setSalary(payrollItem.getSalary());
+	      payrollItem.setAllowance_amount(payrollItem.getAllowance_amount());
+	      payrollItem.setAllownces_type(payrollItem.getAllownces_type());
+	      payrollItem.setDeduction_amouont(payrollItem.getDeduction_amouont());
+	      payrollItem.setDeductions(payrollItem.getDeductions());
+	      payrollItem.setGross_net(payrollItem.getGross_net());
+	      payrollItem.setDate_created(payrollItem.getDate_created());
+	        
+	      return payrollItem;
+	        
+	    }
+	
+
+}
